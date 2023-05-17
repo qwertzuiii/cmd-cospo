@@ -1,25 +1,32 @@
 import os
 import runpy
-import ccmd.plugins.gpkg_reader as gpkg
+import _ccmd.plugins.gpkg_reader as gpkg
 import json
 import tomllib
 
+import ctypes # For building to .exe
+
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
-gpkg_project = open(SCRIPT_PATH + '/ccmd/project.gpkg', 'rb').read()
-gpkg_project = gpkg.read(gpkg_project)
-gpkg_project = json.loads(gpkg_project)
-gpkg_version = open(SCRIPT_PATH + '/ccmd/version.gpkg', 'rb').read()
-gpkg_version = gpkg.read(gpkg_version)
-gpkg_version = json.loads(gpkg_version)
-
-tomlfile = open(SCRIPT_PATH + "/ccmd/config.toml", 'r').read()
+tomlfile = open(SCRIPT_PATH + "/_ccmd/config.toml", 'r').read()
 toml_cfg = tomllib.loads(tomlfile)
 toml_c = toml_cfg['console']
 toml_f = toml_cfg['font']
 
+if toml_c["gpkg_files_needed"]:
+    gpkg_project = open(SCRIPT_PATH + '/_ccmd/project.gpkg', 'rb').read()
+    gpkg_project = gpkg.read(gpkg_project)
+    gpkg_project = json.loads(gpkg_project)
+    gpkg_version = open(SCRIPT_PATH + '/_ccmd/version.gpkg', 'rb').read()
+    gpkg_version = gpkg.read(gpkg_version)
+    gpkg_version = json.loads(gpkg_version)
+
+
 def startHeader():
-    print(' {}, by {} - version {} ({})'.format(gpkg_project['project_name'].upper(), gpkg_project['project_creator'], gpkg_version['version'], gpkg_version['buildnum']))
+    if toml_c["gpkg_files_needed"]:
+        print(' {}, by {} - version {} ({})'.format(gpkg_project['project_name'].upper(), gpkg_project['project_creator'], gpkg_version['version'], gpkg_version['buildnum']))
+    else:
+        print(' CMD-COSPO, by qwertzuiii - version / (/)')
     print()
     print()
 
@@ -45,8 +52,8 @@ class cmdlist:
         if len(ARGV) < 2:
             return errors.not_enough_arguments()
 
-        if os.path.exists(SCRIPT_PATH + '\\ccmd\\plugins\\' + ARGV[1] + '.py'):
-            x = SCRIPT_PATH + '\\ccmd\\plugins\\' + ARGV[1] + '.py'
+        if os.path.exists(SCRIPT_PATH + '\\_ccmd\\plugins\\' + ARGV[1] + '.py'):
+            x = SCRIPT_PATH + '\\_ccmd\\plugins\\' + ARGV[1] + '.py'
         else:
             x = ARGV[1]
         
