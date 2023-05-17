@@ -2,6 +2,8 @@
 "start_with_header" = true
 "prompt_prefix" = "DEFAULT"
 
+"gpkg_files_needed" = true
+
 [font]
 "change_font" = true
 "font_name" = "Courier New"
