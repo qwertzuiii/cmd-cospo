@@ -1,23 +1,25 @@
-#### ~~[Download]()~~
+#### [Download](https://github.com/qwertzuiii/cmd-cospo/releases/latest)
 
-# Project
+# cmd-cospo
 
-a project
+A customizable cmd with plugins to install.
+
+## Basic Commands
+- `:run [PluginName (or path if not in plugins directory), no .py at the end!]` - Runs plugins
+- ... All other windows cmd commands
 
 ---
 
 ## TODOs
 
-- [ ] A
-    - [x] AA
-    - [x] AB
-- [ ] B
-- [ ] C
+- [ ] Adding more commands
+    - [ ] `:help` command
+    - ...
 
 ---
 
 ## How to edit the source code?
 
-[Download source code](DLINK)
+[Download source code](https://github.com/qwertzuiii/cmd-cospo/archive/refs/heads/main.zip)
 
 `pip install -r requirements.txt`
