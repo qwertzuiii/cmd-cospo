@@ -1,0 +1,35 @@
+# changelog:
+#   categories:
+#   - title: Bug-Fixes
+#     labels:
+#     - fix
+#     - bug
+#     - bugfix
+#   - title: New Features
+#     labels:
+#     - feature
+#     - enhancement
+#   - title: Other Changes
+#     labels:
+#        - “*”
+
+changelog:
+  categories:
+    - title: New Features 🚀
+      labels:
+        - feature
+    - title: Improvements ✨
+      labels:
+        - improvement
+    - title: Bug Fixes 🐛
+      labels:
+        - bugfix
+    - title: Other changes 🔧
+      labels:
+        - '*'
+      exclude:
+        labels:
+          - dependencies
+          - enhancement
+          - bugfix
+          - ignore-release

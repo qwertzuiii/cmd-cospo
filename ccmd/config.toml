@@ -1,0 +1,7 @@
+[console]
+"start_with_header" = true
+"prompt_prefix" = "DEFAULT"
+
+[font]
+"change_font" = true
+"font_name" = "Courier New"
