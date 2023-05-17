@@ -47,7 +47,7 @@ class errors:
         print("* Directory don't found!")
 
 class cmdlist:
-    def help():
+    def help(ARGV):
         print('/')
         pass
 
