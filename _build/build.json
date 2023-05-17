@@ -1,0 +1,7 @@
+{
+    "$file": "C:/ABSPATH/TO/cospo.py",
+    "$name": "ccmd",
+    "$icon": false,
+    "$add-data": ["ABSPATH/TO/_ccmd;_ccmd/"],
+    "$seeconsole": true
+}
