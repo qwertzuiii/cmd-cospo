@@ -32,20 +32,23 @@ def startHeader():
 
 class errors:
     def not_enough_arguments():
-        print('Not enough Arguments!')
+        print('* Not enough Arguments!')
     
     def module_not_found(module_name=""):
-        print(f'Module "{module_name}" not found/installed!')
+        print(f'* Module "{module_name}" not found/installed!')
     
     def module_importing_exception(e=""):
-        print(f'Error while importing module: {str(e)}')
+        print(f'* Error while importing module: {str(e)}')
 
     def attribute_error(module_name=""):
-        print(f'run() cannot be found in module "{module_name}"!')
+        print(f'* run() cannot be found in module "{module_name}"!')
+    
+    def dir_not_found():
+        print("* Directory don't found!")
 
 class cmdlist:
     def help():
-        print('HEKL')
+        print('/')
         pass
 
     def runcode(ARGV, func_name="run", func_arguments = None):
@@ -81,19 +84,48 @@ class cmdlist:
                 plugin[func_name](func_arguments)
         except AttributeError:
             return errors.attribute_error(ARGV[1])
+        
+    def cd(ARGV):
+        current = os.getcwd()
+        current_s = current.split("\\")
+        length_current = len(current_s)
+        #print(f'DEBUG: {current_s}, {length_current}')
+
+        if len(ARGV) < 2:
+            return errors.not_enough_arguments()
+
+        if ARGV[1] == "-":
+            new = ""
+            for i in range(length_current -1): # "-1" means go one back
+                #print(f'DEBUG: {i}')
+                new += current_s[i] + "\\"
+        else:
+            new = os.path.abspath(ARGV[1])
+        
+        #print(f'DEBUG: {new}')
+        
+        try:
+            os.chdir(new)
+        except FileNotFoundError:
+            return errors.dir_not_found()
+
 
 
 commands = {
     ":help": cmdlist.help,
-    ":run": cmdlist.runcode
+    ":run": cmdlist.runcode,
+    ":goto": cmdlist.cd
 }
 
-cwd = os.getcwd()
 
-if toml_c['prompt_prefix'] == "DEFAULT":
-    prompt_prefix = 'cospo @ {} $ '.format(cwd)
-else:
-    prompt_prefix = toml_c['prompt_prefix']
+
+def _refresh_prefix():
+    cwd = os.getcwd()
+    if toml_c['prompt_prefix'] == "DEFAULT":
+        return 'cospo @ {} $ '.format(cwd)
+    else:
+        i = toml_c['prompt_prefix']
+        return i.replace('%path', cwd)
 
 if toml_f["change_font"]:
     cmdlist.runcode(['', 'console_fontchanging'], func_name="_FONT_CHANGE", func_arguments=toml_f["font_name"])
@@ -104,7 +136,7 @@ if toml_c["start_with_header"]:
 while True:
 
 
-    i = input(prompt_prefix)
+    i = input(_refresh_prefix())
 
     c = i.split(' ')
     #print(c)
