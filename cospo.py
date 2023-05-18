@@ -4,6 +4,7 @@ import _ccmd.plugins.gpkg_reader as gpkg
 import json
 import tomllib
 import sys
+import shlex
 
 import ctypes # For building to .exe
 
@@ -55,6 +56,12 @@ class cmdlist:
     def runcode(ARGV, func_name="run", func_arguments = None):
         if len(ARGV) < 2:
             return errors.not_enough_arguments()
+
+        if len(ARGV) > 2:
+            #print(f'DEBUG: {ARGV}, /')
+            func_arguments = ARGV.copy()
+            func_arguments.remove(ARGV[0])
+            #print(f'DEBUG: {ARGV}, {func_arguments}')
 
         if os.path.exists(SCRIPT_PATH + '\\_ccmd\\plugins\\' + ARGV[1] + '.py'):
             x = SCRIPT_PATH + '\\_ccmd\\plugins\\' + ARGV[1] + '.py'
@@ -148,7 +155,7 @@ while True:
 
     i = input(_refresh_prefix())
 
-    c = i.split(' ')
+    c = shlex.split(i)
     #print(c)
 
     if c[0] in commands:
