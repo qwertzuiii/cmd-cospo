@@ -3,6 +3,7 @@ import runpy
 import _ccmd.plugins.gpkg_reader as gpkg
 import json
 import tomllib
+import sys
 
 import ctypes # For building to .exe
 
@@ -108,13 +109,22 @@ class cmdlist:
             os.chdir(new)
         except FileNotFoundError:
             return errors.dir_not_found()
+    
+    def quit(ARGV):
+        sys.exit()
 
 
 
 commands = {
     ":help": cmdlist.help,
+
     ":run": cmdlist.runcode,
-    ":goto": cmdlist.cd
+    
+    ":goto": cmdlist.cd,
+
+    ":q": cmdlist.quit,
+    ":quit": cmdlist.quit,
+    ":exit": cmdlist.quit
 }
 
 
