@@ -7,6 +7,7 @@ A customizable cmd with plugins to install.
 ## Basic Commands
 - `:run [PluginName (or path if not in plugins directory), no .py at the end!]` - Runs plugins
 - `:goto -/[DirectoryName]` - Replaces the `cd` command (just type `-` to go a directory back)
+- `:quit` - Replaces the `exit` command
 - ... All other windows cmd commands
 
 ---
@@ -36,4 +37,4 @@ You need to import these libraries in `cospo.py` and compile it!
 
 - Edit `build.json` in `_build` and set the full paths
 
-- Open the builder [Tip: You can use System Environments to put the build in a Folder, to open it easily in a cmd!] and select the `build.json` and click on **Build**
+- Open the builder [Tip: You can use System Environments to put the builder in a Folder, to open it easily in a cmd!] and select the `build.json` and click on **Build**
