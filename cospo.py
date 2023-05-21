@@ -1,10 +1,11 @@
 import os
 import runpy
-import _ccmd.plugins.gpkg_reader as gpkg
+import _ccmd.plugins.CCMD_gpkg_reader as gpkg
 import json
 import tomllib
 import sys
 import shlex
+import glob
 
 import ctypes # For building to .exe
 
@@ -14,6 +15,11 @@ tomlfile = open(SCRIPT_PATH + "/_ccmd/config.toml", 'r').read()
 toml_cfg = tomllib.loads(tomlfile)
 toml_c = toml_cfg['console']
 toml_f = toml_cfg['font']
+
+if toml_c["path_plugin"] == "DEFAULT":
+    PLUGIN_PATH = '\\_ccmd\\plugins\\'
+else:
+    PLUGIN_PATH = "\\" + toml_c["path_plugin"]
 
 if toml_c["gpkg_files_needed"]:
     gpkg_project = open(SCRIPT_PATH + '/_ccmd/project.gpkg', 'rb').read()
@@ -68,9 +74,25 @@ class cmdlist:
             func_arguments = ARGV.copy()
             func_arguments.remove(ARGV[0])
             #print(f'DEBUG: {ARGV}, {func_arguments}')
+        
+        if ARGV[1] == "@list" or ARGV[1] == "@l":
+            plugins = glob.glob(SCRIPT_PATH + PLUGIN_PATH + '*.py')
+            
+            print('Plugins:')
+            for plg in plugins:
+                splitted = plg.split("\\")  # Split to remove path
+                splitted_ln = len(splitted) - 1  # "
+                plug = splitted[splitted_ln]  # "
 
-        if os.path.exists(SCRIPT_PATH + '\\_ccmd\\plugins\\' + ARGV[1] + '.py'):
-            x = SCRIPT_PATH + '\\_ccmd\\plugins\\' + ARGV[1] + '.py'
+                plug = plug.replace('.py', '')  # Remove `.py`
+
+                if not "CCMD_" in plug: # Ignore `CCMD_` plugins
+                    print(f" - {plug}")
+            return
+
+
+        if os.path.exists(SCRIPT_PATH + PLUGIN_PATH + ARGV[1] + '.py'):
+            x = SCRIPT_PATH + PLUGIN_PATH + ARGV[1] + '.py'
         else:
             x = ARGV[1]
         
@@ -151,7 +173,7 @@ def _refresh_prefix():
         return i.replace('%path', cwd)
 
 if toml_f["change_font"]:
-    cmdlist.runcode(['', 'console_fontchanging'], func_name="_FONT_CHANGE", func_arguments=toml_f["font_name"])
+    cmdlist.runcode(['', 'CCMD_console_fontchanging'], func_name="_FONT_CHANGE", func_arguments=toml_f["font_name"])
 
 
 if toml_c["default_color"] != "DEFAULT":

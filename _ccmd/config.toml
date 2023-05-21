@@ -6,6 +6,8 @@
 
 "gpkg_files_needed" = true
 
+"path_plugin" = "DEFAULT"
+
 [font]
 "change_font" = false
 "font_name" = "Courier New"

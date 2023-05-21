@@ -5,8 +5,13 @@
 A customizable cmd with plugins to install.
 
 ## Basic Commands
-- `:run [PluginName (or path if not in plugins directory), no .py at the end!]` - Runs plugins
-- `:goto -/[DirectoryName]` - Replaces the `cd` command (just type `-` to go a directory back)
+- `:run` - Runs plugins
+    - `[PluginName (no .py at end, in plugins folder)]` - **Required** for running plugin
+    - `@list` - Lists all plugins available
+
+- `:goto` - Replaces the `cd` command
+    - `[DirectoryName]` - **Required** to go into a directory
+    - `-` - Go a directory back
 - `:quit` - Replaces the `exit` command
 - ... All other windows cmd commands
 
