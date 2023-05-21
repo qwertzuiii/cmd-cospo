@@ -1,9 +1,11 @@
 [console]
 "start_with_header" = true
+"clear_on_start" = true
 "prompt_prefix" = "DEFAULT"
+"default_color" = "0a"
 
 "gpkg_files_needed" = true
 
 [font]
-"change_font" = true
+"change_font" = false
 "font_name" = "Courier New"

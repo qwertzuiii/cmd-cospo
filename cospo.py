@@ -32,6 +32,12 @@ def startHeader():
     print()
     print()
 
+def clear_cmd():
+    os.system('cls')
+
+def change_color(color):
+    os.system("color " + color)
+
 class errors:
     def not_enough_arguments():
         print('* Not enough Arguments!')
@@ -146,6 +152,13 @@ def _refresh_prefix():
 
 if toml_f["change_font"]:
     cmdlist.runcode(['', 'console_fontchanging'], func_name="_FONT_CHANGE", func_arguments=toml_f["font_name"])
+
+
+if toml_c["default_color"] != "DEFAULT":
+    change_color(toml_c["default_color"])
+
+if toml_c["clear_on_start"]:
+    clear_cmd()
 
 if toml_c["start_with_header"]:
     startHeader()
