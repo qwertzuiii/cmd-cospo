@@ -153,10 +153,11 @@ commands = {
     ":help": cmdlist.help,
 
     ":run": cmdlist.runcode,
+    ":r":   cmdlist.runcode,
     
     ":goto": cmdlist.cd,
 
-    ":q": cmdlist.quit,
+    ":q":    cmdlist.quit,
     ":quit": cmdlist.quit,
     ":exit": cmdlist.quit
 }
