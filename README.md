@@ -7,7 +7,7 @@ A customizable cmd with plugins to install.
 ## Basic Commands
 - `:run` - Runs plugins
     - `[PluginName (no .py at end, in plugins folder)]` - **Required** for running plugin
-    - `@list` - Lists all plugins available
+    - `@list / @l` - Lists all plugins available
 
 - `:goto` - Replaces the `cd` command
     - `[DirectoryName]` - **Required** to go into a directory
