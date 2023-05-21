@@ -185,14 +185,24 @@ if toml_c["clear_on_start"]:
 if toml_c["start_with_header"]:
     startHeader()
 
+if toml_c["add_spacing_on_prompt"]:
+    add_spacing = True
+else:
+    add_spacing = False
+
 while True:
 
+    if add_spacing:
+        print()
 
     i = input(_refresh_prefix())
 
     c = shlex.split(i)
     #print(c)
 
+    if add_spacing:
+        print()
+    
     if c[0] in commands:
         commands[c[0]](c)
     else:
