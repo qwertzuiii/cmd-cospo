@@ -69,11 +69,10 @@ class cmdlist:
         if len(ARGV) < 2:
             return errors.not_enough_arguments()
 
-        if len(ARGV) > 2:
-            #print(f'DEBUG: {ARGV}, /')
-            func_arguments = ARGV.copy()
-            func_arguments.remove(ARGV[0])
-            #print(f'DEBUG: {ARGV}, {func_arguments}')
+        #print(f'DEBUG: {ARGV}, /')
+        func_arguments = ARGV.copy()
+        func_arguments.remove(ARGV[0])
+        #print(f'DEBUG: {ARGV}, {func_arguments}')
         
         if ARGV[1] == "@list" or ARGV[1] == "@l":
             plugins = glob.glob(SCRIPT_PATH + PLUGIN_PATH + '*.py')
