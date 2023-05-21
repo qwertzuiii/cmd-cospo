@@ -3,6 +3,7 @@
 "clear_on_start" = true
 "prompt_prefix" = "DEFAULT"
 "default_color" = "0a"
+"add_spacing_on_prompt" = true
 
 "gpkg_files_needed" = true
 
